@@ -1,14 +1,22 @@
 {
   "commands": {
-    "names": {
-      "ping": "ping",
-      "verify": "verify"
+    "ping": {
+      "description": "A ping command used to test the bot",
+      "response": "Pong!"
     },
-    "descriptions": {
-      "ping": ""
+    "about": {
+      "description": "A test command used to retrieve snippets about certain users",
+      "error": {
+        ""
+      },
+      "response": {
+        "sakaros": "Ah yes, Sakaros; the venerable wiki grandpa.",
+        "mpk": "Memelord, Inc.",
+        "sebolto": "Sebolto is the handsome & talented moderator."
+      }
     },
-    "responses": {
-
+    "verify": {
+      "description": "A command used to check if joining members are SWF users"
     }
   }
 }

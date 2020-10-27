@@ -1,12 +1,13 @@
 const Command = require("../util/command.js");
+const lang = require("../../resources/lang.json");
 
 class Ping extends Command {
   constructor () {
-    super("ping", "ping command");
+    super("ping", lang.commands.ping.description);
   }
 
   execute (message, args) {
-    message.channel.send("pong!");
+    message.channel.send(lang.commands.ping.response);
   }
 }
 
