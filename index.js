@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 
 const client = new Discord.Client();
 
-client.once("ready", => {
+client.once("ready", () => {
   console.log("Online");
 });
 
