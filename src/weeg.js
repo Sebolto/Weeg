@@ -54,8 +54,9 @@ class Weeg {
         console.log(command.name, this.commands.has(command.name));
       }
 
-      if (!this.commands.has(command.name)) {
+      if (!this.commands.has(command.name) && !command.loaded) {
         this.commands.set(command.name, command);
+        command.loaded = true;
       }
     });
   }
