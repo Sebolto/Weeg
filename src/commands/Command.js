@@ -1,7 +1,15 @@
 class Command {
   constructor (name, description) {
-      this.name = name;
-      this.description = description
+      this._name = name;
+      this._description = description;
+  }
+
+  set name (name) {
+    this._name = name;
+  }
+
+  set description (description) {
+    this._description = description;
   }
 
   execute () {

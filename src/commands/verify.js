@@ -1,7 +1,11 @@
-module.exports = {
-  name: "verify",
-  description: "verify command",
-  execute (message, args) {
-    message.channel.send("verify yourself");
+class Verify extends Command {
+  constructor () {
+    super("verify", "verify command");
   }
-};
+
+  execute (message, args) {
+    message.channel.send("verify yourself!");
+  }
+}
+
+module.exports = Verify;
