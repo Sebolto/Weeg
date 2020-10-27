@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Sebolto/Weeg/issues"
   },
-  "homepage": "https://github.com/Sebolto/Weeg#readme"
+  "homepage": "https://github.com/Sebolto/Weeg#readme",
+  "dependencies": {
+    "discord.js": "^12.4.1"
+  }
 }
