@@ -1,3 +1,5 @@
+const Command = require("./Command.js");
+
 class Ping extends Command {
   constructor () {
     super("ping", "ping command");

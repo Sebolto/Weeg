@@ -10,7 +10,7 @@ class Weeg {
 
     this.config = config.WEEG;
     this._loggedIn = false;
-    this._debug = false;
+    this._debug = true;
 
     this.client.on("ready", this.onReady.bind(this));
     this.client.on("error", this.onError.bind(this));
@@ -47,8 +47,8 @@ class Weeg {
     fs.readdirSync(dir).filter((file) => {
       return file.endsWith(".js");
     }).forEach((file) => {
-      const Command = require(path.join(dir, file));
-      const command = new Command();
+      const CommandClass = require(path.join(dir, file));
+      const command = new CommandClass();
 
       if (this._debug) {
         console.log(command.name, this.commands.has(command.name));

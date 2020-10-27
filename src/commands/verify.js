@@ -1,3 +1,5 @@
+const Command = require("./Command.js");
+
 class Verify extends Command {
   constructor () {
     super("verify", "verify command");
