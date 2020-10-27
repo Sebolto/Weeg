@@ -10,7 +10,7 @@ class Weeg {
 
     this.config = config.WEEG;
     this._loggedIn = false;
-    this._commands = [];
+    this._debug = false;
 
     this.client.on("ready", this.onReady.bind(this));
     this.client.on("error", this.onError.bind(this));
@@ -34,7 +34,9 @@ class Weeg {
     const args = message.content.slice(this.config.PREFIX.length).split(/ +/);
     const command = args.shift().toLowerCase();
 
-    console.log(args, command);
+    if (this._debug) {
+      console.log(args, command);
+    }
 
     this.commands.get(command).execute(message, args);
   }
@@ -45,7 +47,9 @@ class Weeg {
     }).forEach((file) => {
       const command = require(path.join(dir, file));
 
-      console.log(command.name, this.commands.has(command.name));
+      if (this._debug) {
+        console.log(command.name, this.commands.has(command.name));
+      }
 
       if (!this.commands.has(command.name)) {
         this.commands.set(command.name, command);
