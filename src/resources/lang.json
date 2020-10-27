@@ -1,13 +1,17 @@
 {
   "commands": {
+    "command": {
+      "error": {
+        "unimplemented": "Function execute() is required for implementation"
+      }
+    },
     "ping": {
-      "description": "A ping command used to test the bot",
       "response": "Pong!"
     },
     "about": {
-      "description": "A test command used to retrieve snippets about certain users",
       "error": {
-        "formatting": "Secondary parameter required; format as \"!about Sebolto\""
+        "formatting": "Error: Secondary parameter required; format as \"!about Sebolto\"",
+        "nonexistent": "Error: No user by that name found"
       },
       "response": {
         "sakaros": "Ah yes, Sakaros; the venerable wiki grandpa.",
@@ -16,7 +20,7 @@
       }
     },
     "verify": {
-      "description": "A command used to check if joining members are SWF users"
+
     }
   }
 }

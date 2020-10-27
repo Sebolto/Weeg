@@ -2,32 +2,27 @@ const Command = require("../util/command.js");
 const lang = require("../../resources/lang.json");
 
 class About extends Command {
-  constructor (name, loaded) {
-    super (name, loaded);
-  }
 
   execute (message, args) {
+
+    let systemMessage, errorAlias;
+
+    errorAlias = lang.commands.about.error;
+
     if (!args.length) {
-      message.channel.send(`Secondary parameter required; format as \"!about Sebolto\" `);
+      message.channel.send(errorAlias.formatting);
       return;
     }
 
-    let messageValue, username;
     args.forEach((arg) => {
-      username = arg.toLowerCase();
-      switch (username) {
-        case "sebolto":
-          return messageValue = "Very handsome moderator";
-        case "sakaros":
-          return messageValue = "Wiki grandpa";
-        case "mpk":
-          return messageValue = "Memelord, Inc.";
-        default:
-          break;
+      systemMessage = lang.commands.about.response[arg.toLowerCase()];
+
+      if (systemMessage) {
+        return;
       }
     });
 
-    message.channel.send(`[${username.toUpperCase()}]\n- ${messageValue}`);
+    message.channel.send(systemMessage || errorAlias.nonexistent);
   }
 }
 

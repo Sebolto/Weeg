@@ -1,3 +1,5 @@
+const lang = require("../../resources/lang.json");
+
 class Command {
   constructor (name, loaded) {
     this._name = name;
@@ -9,7 +11,7 @@ class Command {
   }
 
   set loaded (loaded) {
-    this._loaded = (typeof value === "boolean") ? loaded : false;
+    this._loaded = typeof value === "boolean" ? loaded : false;
   }
 
   get name () {
@@ -21,7 +23,7 @@ class Command {
   }
 
   execute () {
-    throw new Error("Function execute() is required for implementation");
+    throw new Error(lang.commands.command.error.unimplemented);
   }
 }
 
