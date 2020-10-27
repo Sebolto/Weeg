@@ -62,7 +62,7 @@ class Weeg {
   loadCommands (dir) {
     fs.readdirSync(dir).filter((file) => {
       return file.endsWith(".js");
-    }).forEach((file) => this.loadCommand.bind(this));
+    }).forEach((file) => this.loadCommand(dir, file));
   }
 
   login (token) {
