@@ -7,7 +7,7 @@
     "about": {
       "description": "A test command used to retrieve snippets about certain users",
       "error": {
-        ""
+        "formatting": "Secondary parameter required; format as \"!about Sebolto\""
       },
       "response": {
         "sakaros": "Ah yes, Sakaros; the venerable wiki grandpa.",

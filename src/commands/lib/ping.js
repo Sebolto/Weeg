@@ -2,8 +2,8 @@ const Command = require("../util/command.js");
 const lang = require("../../resources/lang.json");
 
 class Ping extends Command {
-  constructor () {
-    super("ping", lang.commands.ping.description);
+  constructor (name) {
+    super(name);
   }
 
   execute (message, args) {

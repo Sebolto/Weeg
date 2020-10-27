@@ -1,16 +1,11 @@
 class Command {
-  constructor (name, desc) {
+  constructor (name) {
     this._name = name;
-    this._desc = desc;
     this._loaded = false;
   }
 
   set name (name) {
     this._name = name;
-  }
-
-  set desc (desc) {
-    this._desc = desc;
   }
 
   set loaded (loaded) {
@@ -19,10 +14,6 @@ class Command {
 
   get name () {
     return this._name;
-  }
-
-  get description () {
-    return this._desc;
   }
 
   get loaded () {
