@@ -38,7 +38,9 @@ class Weeg {
       console.log(args, command);
     }
 
-    this.commands.get(command).execute(message, args);
+    if (this.commands.has(command)) {
+      this.commands.get(command).execute(message, args);
+    }
   }
 
   loadCommands (dir) {
