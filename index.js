@@ -15,10 +15,10 @@ client.on("message", (message) => {
     return;
   }
 
-  console.log(message.content);
-
   const args = message.content.slice(prefix).split(/ +/);
   const command = args.shift().toLowerCase();
+
+  console.log(args, command);
 
   if (command === "ping") {
     message.channel.send("pong");
