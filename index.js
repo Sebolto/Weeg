@@ -26,9 +26,13 @@ client.on("message", (message) => {
 
   console.log(args, command);
 
+  client.commands.get(command).execute(message, args);
+
+  /*
   if (command === "ping") {
     client.commands.get("ping").execute(message, args);
   }
+  */
 });
 
 client.once("ready", () => {
