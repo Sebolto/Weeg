@@ -40,25 +40,29 @@ class Weeg {
 
     if (this.commands.has(command)) {
       this.commands.get(command).execute(message, args);
+    } else {
+      //path.join(__dirname, "src", "commands", "lib")
+    }
+  }
+
+  loadCommand (dir, file) {
+    const Command = require(path.join(dir, file));
+    const command = new Command();
+
+    if (this._debug) {
+      console.log(command.name, this.commands.has(command.name));
+    }
+
+    if (!this.commands.has(command.name) && !command.loaded) {
+      this.commands.set(command.name, command);
+      command.loaded = true;
     }
   }
 
   loadCommands (dir) {
     fs.readdirSync(dir).filter((file) => {
       return file.endsWith(".js");
-    }).forEach((file) => {
-      const Command = require(path.join(dir, file));
-      const command = new Command();
-
-      if (this._debug) {
-        console.log(command.name, this.commands.has(command.name));
-      }
-
-      if (!this.commands.has(command.name) && !command.loaded) {
-        this.commands.set(command.name, command);
-        command.loaded = true;
-      }
-    });
+    }).forEach((file) => this.loadCommand.bind(this));
   }
 
   login (token) {

@@ -1,3 +1,14 @@
 {
+  "commands": {
+    "names": {
+      "ping": "ping",
+      "verify": "verify"
+    },
+    "descriptions": {
+      "ping": ""
+    },
+    "responses": {
 
+    }
+  }
 }
