@@ -15,7 +15,7 @@ client.on("message", (message) => {
     return;
   }
 
-  const args = message.content.slice(prefix).split(/ +/);
+  const args = message.content.slice(prefix.length).split(/ +/);
   const command = args.shift().toLowerCase();
 
   console.log(args, command);
