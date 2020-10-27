@@ -4,7 +4,7 @@ class Command {
       this.description = description
   }
 
-  execute (message, args) {
+  execute () {
     throw new Error("Function execute() is required for implementation");
   }
 }
