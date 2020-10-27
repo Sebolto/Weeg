@@ -11,8 +11,11 @@ client.once("ready", () => {
 
 client.on("message", (message) => {
   if (!message.content.startsWith(prefix) || message.author.bot) {
+    console.log("Return");
     return;
   }
+
+  console.log(message.content);
 
   const args = message.content.slice(prefix).split(/ +/);
   const command = args.shift().toLowerCase();
