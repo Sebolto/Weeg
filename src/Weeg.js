@@ -47,8 +47,8 @@ class Weeg {
     fs.readdirSync(dir).filter((file) => {
       return file.endsWith(".js");
     }).forEach((file) => {
-      const CommandClass = require(path.join(dir, file));
-      const command = new CommandClass();
+      const Command = require(path.join(dir, file));
+      const command = new Command();
 
       if (this._debug) {
         console.log(command.name, this.commands.has(command.name));
