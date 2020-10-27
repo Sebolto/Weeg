@@ -1,15 +1,15 @@
 class Command {
-  constructor (name) {
+  constructor (name, loaded) {
     this._name = name;
-    this._loaded = false;
+    this._loaded = loaded;
   }
 
   set name (name) {
-    this._name = name;
+    this._name = typeof name === "string" || name instanceof String ? name : "";
   }
 
   set loaded (loaded) {
-    this._loaded = loaded;
+    this._loaded = (typeof value === "boolean") ? loaded : false;
   }
 
   get name () {

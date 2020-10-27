@@ -45,7 +45,7 @@ class Weeg {
         if (this._debug) {
           console.log("Loading unloaded resource");
         }
-        this.loadCommand(undefined, command);
+        this.loadCommand(undefined, `${command}.js`);
       } catch (error) {
         return console.error("Error", error);
       }
@@ -54,11 +54,11 @@ class Weeg {
   }
 
   loadCommand (dir = path.join(__dirname, "commands", "lib"), file) {
-    const Command = require(path.join(dir, `${file}.js`));
-    const command = new Command(file);
+    const Command = require(path.join(dir, file));
+    const command = new Command(file.split(".")[0], false);
 
     if (this._debug) {
-      console.log(command.name, this.commands.has(command.name));
+      console.log(`${command.name} -> ${this.commands.has(command.name)}`);
     }
 
     if (!this.commands.has(command.name) && !command.loaded) {
@@ -70,7 +70,7 @@ class Weeg {
   loadCommandDir (dir) {
     fs.readdirSync(dir).filter((file) => {
       return file.endsWith(".js");
-    }).forEach((file) => this.loadCommand(dir, file.split(".")[0]));
+    }).forEach((file) => this.loadCommand(dir, file));
   }
 
   login (token) {

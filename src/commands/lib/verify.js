@@ -1,8 +1,8 @@
 const Command = require("../util/command.js");
 
 class Verify extends Command {
-  constructor (name) {
-    super(name);
+  constructor (name, loaded) {
+    super (name, loaded);
   }
 
   execute (message, args) {

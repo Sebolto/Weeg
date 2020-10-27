@@ -2,8 +2,8 @@ const Command = require("../util/command.js");
 const lang = require("../../resources/lang.json");
 
 class About extends Command {
-  constructor (name) {
-    super(name);
+  constructor (name, loaded) {
+    super (name, loaded);
   }
 
   execute (message, args) {
