@@ -1,5 +1,5 @@
 const path = require("path");
-const Weeg = require("./src/Weeg.js");
+const Weeg = require("./src/weeg.js");
 const client = new Weeg();
 
 client.loadCommands(path.join(__dirname, "src", "commands"));

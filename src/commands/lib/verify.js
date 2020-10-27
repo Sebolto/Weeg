@@ -1,4 +1,4 @@
-const Command = require("./Command.js");
+const Command = require("./command.js");
 
 class Verify extends Command {
   constructor () {
