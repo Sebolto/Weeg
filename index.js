@@ -5,24 +5,15 @@ const config = require("./config.json");
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
-const commandFiles = fs.readdirSync("./src/commands").filter((file) => {
+// Populate commands collection
+fs.readdirSync("./src/commands").filter((file) => {
   return file.endsWith(".js");
-});
-
-for (let file of commandFiles) {
+}).forEach((file) => {
   let command = require(`./src/commands/${file}`);
-
   client.commands.set(command.name, command);
-}
-
-
-
+});
 
 const prefix = "!";
-
-client.once("ready", () => {
-  console.log("Online");
-});
 
 client.on("message", (message) => {
   if (!message.content.startsWith(prefix) || message.author.bot) {
@@ -36,8 +27,12 @@ client.on("message", (message) => {
   console.log(args, command);
 
   if (command === "ping") {
-    message.channel.send("pong");
+    client.commands.get("ping").execute(message, args);
   }
+});
+
+client.once("ready", () => {
+  console.log("Online");
 });
 
 client.login(process.env.TOKEN || config.WEEG.TOKEN);
