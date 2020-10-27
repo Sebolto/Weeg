@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const Discord = require("discord.js");
-const config = require("./config.json");
+const config = require("../config.json");
 
 class Weeg {
   constructor () {
@@ -9,7 +9,7 @@ class Weeg {
     this.commands = new Discord.Collection();
 
     this.config = config.WEEG;
-    this.loggedIn = false;
+    this._loggedIn = false;
     this._commands = [];
 
     this.client.on("ready", this.onReady.bind(this));
@@ -36,7 +36,7 @@ class Weeg {
 
     console.log(args, command);
 
-    client.commands.get(command).execute(message, args);
+    this.commands.get(command).execute(message, args);
   }
 
   loadCommands (dir) {
