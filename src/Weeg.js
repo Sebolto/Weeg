@@ -44,7 +44,12 @@ class Weeg {
       return file.endsWith(".js");
     }).forEach((file) => {
       const command = require(path.join(dir, file));
-      this.commands.set(command.name, command);
+
+      console.log(command.name, this.commands.has(command.name));
+
+      if (!this.commands.has(command.name)) {
+        this.commands.set(command.name, command);
+      }
     });
   }
 
