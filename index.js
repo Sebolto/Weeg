@@ -16,6 +16,10 @@ client.on("message", (message) => {
 
   const args = message.content.slice(prefix).split(/ +/);
   const command = args.shift().toLowerCase();
+
+  if (command === "ping") {
+    message.channel.send("pong");
+  }
 });
 
 client.login(process.env.TOKEN || config.WEEG.TOKEN);
