@@ -12,6 +12,7 @@ class Weeg {
     this._loggedIn = false;
     this._debug = true;
 
+    // Listeners
     this.client.on("ready", this.onReady.bind(this));
     this.client.on("error", this.onError.bind(this));
     this.client.on("message", this.onMessage.bind(this));
@@ -38,14 +39,21 @@ class Weeg {
       console.log(args, command);
     }
 
-    if (this.commands.has(command)) {
-      this.commands.get(command).execute(message, args);
-    } else {
-      //path.join(__dirname, "src", "commands", "lib")
+    // Should never be encountered, but handle unloaded commands
+    if (!this.commands.has(command)) {
+      try {
+        if (this._debug) {
+          console.log("Loading unloaded resource");
+        }
+        this.loadCommand(undefined, `${command}.js`);
+      } catch (error) {
+        return console.error("Error", error);
+      }
     }
+    this.commands.get(command).execute(message, args);
   }
 
-  loadCommand (dir, file) {
+  loadCommand (dir = path.join(__dirname, "commands", "lib"), file) {
     const Command = require(path.join(dir, file));
     const command = new Command();
 
@@ -59,7 +67,7 @@ class Weeg {
     }
   }
 
-  loadCommands (dir) {
+  loadCommandDir (dir) {
     fs.readdirSync(dir).filter((file) => {
       return file.endsWith(".js");
     }).forEach((file) => this.loadCommand(dir, file));
