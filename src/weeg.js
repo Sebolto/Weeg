@@ -44,9 +44,6 @@ class Weeg {
 
     if (!this.commands.has(command)) {
       try {
-        if (this._debug) {
-          console.log("Loading unloaded resource");
-        }
         this.loadCommand(undefined, `${command}.js`);
       } catch (error) {
         return console.error(lang.weeg.error.error, error);
