@@ -1,4 +1,13 @@
 {
+  "weeg": {
+    "error": {
+      "error": "Error",
+      "login": "Error: Already logged in"
+    },
+    "success": {
+      "online": "Online"
+    }
+  },
   "commands": {
     "command": {
       "error": {

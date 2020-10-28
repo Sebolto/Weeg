@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 const Discord = require("discord.js");
 const dotenv = require("dotenv");
+const lang = require("./resources/lang.json");
 
 class Weeg {
   constructor () {
@@ -22,16 +23,15 @@ class Weeg {
   }
 
   onReady () {
-    console.log("Online");
+    return console.log(lang.weeg.success.online);
   }
 
   onError (error) {
-    console.error("Error", error);
+    return console.error(lang.weeg.error.error, error);
   }
 
   onMessage (message) {
     if (!message.content.startsWith(this.config.prefix) || message.author.bot) {
-      console.log("Return");
       return;
     }
 
@@ -49,7 +49,7 @@ class Weeg {
         }
         this.loadCommand(undefined, `${command}.js`);
       } catch (error) {
-        return console.error("Error", error);
+        return console.error(lang.weeg.error.error, error);
       }
     }
     this.commands.get(command).execute(message, args);
@@ -77,7 +77,7 @@ class Weeg {
 
   login (token) {
     if (this._loggedIn) {
-      throw new Error("Already logged in");
+      throw new Error(lang.weeg.error.login);
     }
 
     this._loggedIn = true;
