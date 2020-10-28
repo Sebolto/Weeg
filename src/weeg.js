@@ -1,14 +1,18 @@
 const fs = require("fs");
 const path = require("path");
 const Discord = require("discord.js");
-const config = require("../config.json");
+const dotenv = require("dotenv");
 
 class Weeg {
   constructor () {
+    dotenv.config();
+
     this.client = new Discord.Client();
     this.commands = new Discord.Collection();
 
-    this.config = config.WEEG;
+    this.config = {};
+    this.config.TOKEN = process.env.TOKEN;
+    this.config.prefix = "!";
     this._loggedIn = false;
     this._debug = true;
 
@@ -27,12 +31,12 @@ class Weeg {
   }
 
   onMessage (message) {
-    if (!message.content.startsWith(this.config.PREFIX) || message.author.bot) {
+    if (!message.content.startsWith(this.config.prefix) || message.author.bot) {
       console.log("Return");
       return;
     }
 
-    const args = message.content.slice(this.config.PREFIX.length).split(/ +/);
+    const args = message.content.slice(this.config.prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
 
     if (this._debug) {

@@ -6,21 +6,30 @@
       }
     },
     "ping": {
-      "response": "Pong!"
+      "success": "Pong!"
     },
     "about": {
       "error": {
         "formatting": "Error: Secondary parameter required; format as \"!about Sebolto\"",
         "nonexistent": "Error: No user by that name found"
       },
-      "response": {
+      "success": {
         "sakaros": "Ah yes, Sakaros; the venerable wiki grandpa.",
         "mpk": "Memelord, Inc.",
         "sebolto": "Sebolto is the handsome & talented moderator."
       }
     },
     "verify": {
-
+      "error": {
+        "username": "Error: No username specified.",
+        "redundant": "Error: Account already has the \"user\" role.",
+        "nonexistent": "Error: No such user account found.",
+        "edits": "Error: Insufficient edit count.",
+        "mismatched": "Error: Current Discord username and userpage masthead Discord name do not match."
+      },
+      "success": {
+        "applied": "Success: User role has been applied."
+      }
     }
   }
 }

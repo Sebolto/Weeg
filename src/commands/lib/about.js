@@ -5,24 +5,24 @@ class About extends Command {
 
   execute (message, args) {
 
-    let systemMessage, errorAlias;
+    let systemMessage, aboutAlias;
 
-    errorAlias = lang.commands.about.error;
+    aboutAlias = lang.commands.about;
 
     if (!args.length) {
-      message.channel.send(errorAlias.formatting);
+      message.channel.send(aboutAlias.error.formatting);
       return;
     }
 
     args.forEach((arg) => {
-      systemMessage = lang.commands.about.response[arg.toLowerCase()];
+      systemMessage = aboutAlias.success[arg.toLowerCase()];
 
       if (systemMessage) {
         return;
       }
     });
 
-    message.channel.send(systemMessage || errorAlias.nonexistent);
+    message.channel.send(systemMessage || aboutAlias.error.nonexistent);
   }
 }
 

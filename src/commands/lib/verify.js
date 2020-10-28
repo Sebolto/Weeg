@@ -1,11 +1,12 @@
-const got = require('got');
+const got = require("got");
+const path = require("path");
 const Command = require("../util/command.js");
 const lang = require("../../resources/lang.json");
+const config = require("../../resources/config.json");
 
 class Verify extends Command {
-
   getUserInfo (username) {
-    return got("https://swfanon.fandom.com/api.php", {
+    return got(path.join("https://swfanon.fandom.com", "api.php"), {
       searchParams: {
         action: "query",
         list: "users",
@@ -17,8 +18,8 @@ class Verify extends Command {
   }
 
   getMastheadValue (userid) {
-    return got("https://services.fandom.com/user-attribute/user/" +
-        userid + "/attr/discordHandle", {
+    return got(path.join("https://services.fandom.com", "user-attribute",
+        "user", userid, "attr", "discordHandle"), {
       headers: {
         accept: "*/*"
       }
@@ -26,40 +27,40 @@ class Verify extends Command {
   }
 
   async execute (message, args) {
+    let userInfo, verifyUser, verifyAlias;
 
-    let userInfo, verifyUser;
+    verifyAlias = lang.commands.verify;
 
-    if (message.channel.id !== "770414411935514658") {
-      console.log("Wrong channel");
+    if (message.channel.id !== config.channels.verify) {
       return;
     }
 
     if (!args.length) {
-      message.channel.send("Error: No username specified.");
+      message.channel.send(verifyAlias.error.username);
     }
 
-    if (message.member.roles.cache.has("770419446278914108")) {
-      message.channel.send("Already have this role");
+    if (message.member.roles.cache.has(config.roles.user)) {
+      message.channel.send(verifyAlias.error.redundant);
     }
 
     userInfo = await this.getUserInfo(args[0]);
 
     if (!userInfo.query.users[0]) {
-      return message.channel.send("Error: No such user account found.");
+      return message.channel.send(verifyAlias.error.nonexistent);
     }
 
     if (userInfo.query.users[0].editcount === 0) {
-      return message.channel.send("Error: Insufficient edit count");
+      return message.channel.send(verifyAlias.error.edits);
     }
 
     verifyUser = await this.getMastheadValue(userInfo.query.users[0].userid);
 
     if (verifyUser.value !== message.author.tag) {
-      return message.channel.send("Error: Masthead Discord name and Fandom username do not match.");
+      return message.channel.send(verifyAlias.error.mismatched);
     }
 
-    message.member.roles.add("770419446278914108");
-    message.channel.send("Success: User role has been applied.");
+    message.member.roles.add(config.roles.user);
+    message.channel.send(verifyAlias.success.applied);
   }
 }
 
