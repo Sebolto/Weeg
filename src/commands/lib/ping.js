@@ -4,7 +4,7 @@ const lang = require("../../resources/lang.json");
 class Ping extends Command {
 
   execute (message, args) {
-    message.channel.send(lang.commands.ping.response);
+    message.channel.send(lang.commands.ping.success);
   }
 }
 
