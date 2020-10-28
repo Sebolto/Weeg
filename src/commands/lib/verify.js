@@ -43,7 +43,7 @@ class Verify extends Command {
       return message.channel.send(verifyAlias.error.redundant);
     }
 
-    userInfo = await this.getUserInfo(args[0]);
+    userInfo = await this.getUserInfo(args.join(" ").trim());
 
     if (userInfo.error) {
       return console.log(`[${userInfo.error.code}] - ${userInfo.error.info}`);
