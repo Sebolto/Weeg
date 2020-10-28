@@ -19,7 +19,7 @@ class Verify extends Command {
 
   getMastheadValue (userid) {
     return got(path.join("https://services.fandom.com", "user-attribute",
-        "user", userid, "attr", "discordHandle"), {
+        "user", String(userid), "attr", "discordHandle"), {
       headers: {
         accept: "*/*"
       }
@@ -27,7 +27,7 @@ class Verify extends Command {
   }
 
   async execute (message, args) {
-    let userInfo, verifyUser, verifyAlias;
+    let userInfo, verifyUser, verifyAlias, user;
 
     verifyAlias = lang.commands.verify;
 
@@ -36,24 +36,30 @@ class Verify extends Command {
     }
 
     if (!args.length) {
-      message.channel.send(verifyAlias.error.username);
+      return message.channel.send(verifyAlias.error.username);
     }
 
     if (message.member.roles.cache.has(config.roles.user)) {
-      message.channel.send(verifyAlias.error.redundant);
+      return message.channel.send(verifyAlias.error.redundant);
     }
 
     userInfo = await this.getUserInfo(args[0]);
 
-    if (!userInfo.query.users[0]) {
+    if (userInfo.error) {
+      return console.log(`[${userInfo.error.code}] - ${userInfo.error.info}`);
+    }
+
+    user = userInfo.query.users[0];
+
+    if (!user) {
       return message.channel.send(verifyAlias.error.nonexistent);
     }
 
-    if (userInfo.query.users[0].editcount === 0) {
+    if (user.editcount === 0) {
       return message.channel.send(verifyAlias.error.edits);
     }
 
-    verifyUser = await this.getMastheadValue(userInfo.query.users[0].userid);
+    verifyUser = await this.getMastheadValue(user.userid);
 
     if (verifyUser.value !== message.author.tag) {
       return message.channel.send(verifyAlias.error.mismatched);

@@ -16,7 +16,6 @@ class Weeg {
     this._loggedIn = false;
     this._debug = true;
 
-    // Listeners
     this.client.on("ready", this.onReady.bind(this));
     this.client.on("error", this.onError.bind(this));
     this.client.on("message", this.onMessage.bind(this));
@@ -43,7 +42,6 @@ class Weeg {
       console.log(args, command);
     }
 
-    // Should never be encountered, but handle unloaded commands
     if (!this.commands.has(command)) {
       try {
         if (this._debug) {
