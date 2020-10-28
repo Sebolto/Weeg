@@ -1,4 +1,5 @@
 const Command = require("../util/command.js");
+const lang = require("../../resources/lang.json");
 
 class Verify extends Command {
 
