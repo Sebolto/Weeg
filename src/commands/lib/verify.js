@@ -24,13 +24,15 @@ class Verify extends Command {
     }).json();
   }
 
-  //770419446278914108
   execute (message, args) {
     if (message.member.roles.cache.has("770419446278914108")) {
       message.channel.send("Already have this role");
     } else {
       message.channel.send("You don't have this role");
     }
+
+    message.member.roles.add("770419446278914108");
+    message.channel.send("Success: User role has been applied.");
   }
 }
 
