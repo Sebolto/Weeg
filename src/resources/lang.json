@@ -31,14 +31,14 @@
     },
     "verify": {
       "error": {
-        "username": "Error: No username specified.",
-        "redundant": "Error: Account already has the \"user\" role.",
-        "nonexistent": "Error: No such user account found.",
-        "edits": "Error: Insufficient edit count.",
-        "mismatched": "Error: Current Discord username and userpage masthead Discord name do not match."
+        "username": "please specify a username.",
+        "redundant": "your account already has the \"user\" role.",
+        "nonexistent": "no such user account found.",
+        "edits": "you have an insufficient edit count on the wiki.",
+        "mismatched": "your current Discord username and wiki masthead Discord name do not match."
       },
       "success": {
-        "applied": "Success: User role has been applied."
+        "applied": "the \"User\" role has been applied."
       }
     }
   }
