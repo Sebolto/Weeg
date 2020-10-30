@@ -71,7 +71,7 @@ class Weeg {
 
   loadCommand (dir = path.join(__dirname, "commands", "lib"), file) {
     const Command = require(path.join(dir, file));
-    const command = new Command(file.split(".")[0], false, this.client);
+    const command = new Command(file.split(".")[0], false);
 
     if (this._debug) {
       console.log(`${command.name} -> ${this.commands.has(command.name)}`);
