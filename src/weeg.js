@@ -3,6 +3,7 @@ const path = require("path");
 const Discord = require("discord.js");
 const dotenv = require("dotenv");
 const lang = require("./resources/lang.json");
+const config = require("./resources/config.json");
 
 class Weeg {
   constructor () {
@@ -37,12 +38,12 @@ class Weeg {
       (message.channel.id === config.channels.verify) &&
       (!message.content.startsWith(this.config.prefix + "verify"))
     ) {
-      message.delete(1000);
-      message.channel.send(lang.weeg.error.unrelated);
-
-      setTimeout(() => {
-        message.delete(1000);
-      }, this.config.interval);
+      message.delete();
+      message.reply(lang.weeg.error.unrelated).then(msg => {
+        msg.delete({
+          timeout: this.config.interval
+        })
+      }).catch(console.error);
       return;
     }
 
