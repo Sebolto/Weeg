@@ -77,7 +77,7 @@ class Verify extends Command {
     }
 
     message.member.roles.add(config.roles.user);
-    message.client.channels.cache.get(config.channels.cabal).send(
+    message.client.channels.cache.get(config.channels.logs).send(
       `${message.author.tag} -> User:${wikiUsername}`
     );
     this.addReply(message, verifyAlias.success.applied);
