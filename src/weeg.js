@@ -3,6 +3,7 @@ const path = require("path");
 const Discord = require("discord.js");
 const dotenv = require("dotenv");
 const lang = require("./resources/lang.json");
+const config = require("./resources/config.json");
 
 class Weeg {
   constructor () {
@@ -14,6 +15,8 @@ class Weeg {
     this.config = {};
     this.config.TOKEN = process.env.TOKEN;
     this.config.prefix = "!";
+    this.config.interval = 5000;
+
     this._loggedIn = false;
     this._debug = true;
 
@@ -31,6 +34,19 @@ class Weeg {
   }
 
   onMessage (message) {
+    if (
+      (message.channel.id === config.channels.verify) &&
+      (!message.content.startsWith(this.config.prefix + "verify"))
+    ) {
+      message.delete();
+      message.reply(lang.weeg.error.unrelated).then(msg => {
+        msg.delete({
+          timeout: this.config.interval
+        })
+      }).catch(console.error);
+      return;
+    }
+
     if (!message.content.startsWith(this.config.prefix) || message.author.bot) {
       return;
     }
