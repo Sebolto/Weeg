@@ -35,6 +35,7 @@ class Weeg {
 
   onMessage (message) {
     if (
+      !message.author.bot &&
       (message.channel.id === config.channels.verify) &&
       (!message.content.startsWith(this.config.prefix + "verify"))
     ) {
