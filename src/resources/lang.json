@@ -16,7 +16,10 @@
       }
     },
     "ping": {
-      "success": "Pong!"
+      "success": {
+        "default": "Pong!",
+        "custom": "gnip!"
+      }
     },
     "about": {
       "error": {
@@ -32,7 +35,7 @@
     "verify": {
       "error": {
         "username": "please specify a username.",
-        "redundant": "your account already has the \"user\" role.",
+        "redundant": "your account already has the \"User\" role.",
         "nonexistent": "no such user account found.",
         "edits": "you have an insufficient edit count on the wiki.",
         "mismatched": "your current Discord username and wiki masthead Discord name do not match."
