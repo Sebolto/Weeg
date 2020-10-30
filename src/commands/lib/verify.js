@@ -37,7 +37,7 @@ class Verify extends Command {
   }
 
   async execute (message, args) {
-    let userInfo, verifyUser, verifyAlias, user;
+    let userInfo, verifyUser, verifyAlias, wikiUsername, user;
 
     verifyAlias = lang.commands.verify;
 
@@ -53,7 +53,8 @@ class Verify extends Command {
       return this.addReply(message, verifyAlias.error.redundant);
     }
 
-    userInfo = await this.getUserInfo(args.join(" ").trim());
+    wikiUsername = args.join(" ").trim();
+    userInfo = await this.getUserInfo(wikiUsername);
 
     if (userInfo.error) {
       return console.log(`[${userInfo.error.code}] - ${userInfo.error.info}`);
@@ -76,6 +77,9 @@ class Verify extends Command {
     }
 
     message.member.roles.add(config.roles.user);
+    this.client.channels.cache.get(config.channels.cabal).send(
+      `${message.author.tag} -> User:${wikiUsername}`
+    );
     this.addReply(message, verifyAlias.success.applied);
   }
 }
