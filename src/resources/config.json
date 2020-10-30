@@ -6,5 +6,9 @@
   },
   "channels": {
     "verify": "770414411935514658"
+  },
+  "utility": {
+    "prefix": "!",
+    "interval": 5000
   }
 }

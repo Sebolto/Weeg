@@ -14,11 +14,11 @@ class Weeg {
 
     this.config = {};
     this.config.TOKEN = process.env.TOKEN;
-    this.config.prefix = "!";
-    this.config.interval = 5000;
+    this.config.prefix = config.utility.prefix;
+    this.config.interval = config.utility.interval;
 
     this._loggedIn = false;
-    this._debug = true;
+    this._debug = false;
 
     this.client.on("ready", this.onReady.bind(this));
     this.client.on("error", this.onError.bind(this));

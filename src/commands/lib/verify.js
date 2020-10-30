@@ -26,6 +26,16 @@ class Verify extends Command {
     }).json();
   }
 
+  addReply (message, langMessage) {
+    message.delete();
+
+    message.reply(langMessage).then(msg => {
+      msg.delete({
+        timeout: config.utility.interval
+      })
+    }).catch(console.error);
+  }
+
   async execute (message, args) {
     let userInfo, verifyUser, verifyAlias, user;
 
@@ -36,11 +46,11 @@ class Verify extends Command {
     }
 
     if (!args.length) {
-      return message.channel.send(verifyAlias.error.username);
+      return this.addReply(message, verifyAlias.error.username);
     }
 
     if (message.member.roles.cache.has(config.roles.user)) {
-      return message.channel.send(verifyAlias.error.redundant);
+      return this.addReply(message, verifyAlias.error.redundant);
     }
 
     userInfo = await this.getUserInfo(args.join(" ").trim());
@@ -52,21 +62,21 @@ class Verify extends Command {
     user = userInfo.query.users[0];
 
     if (!user) {
-      return message.channel.send(verifyAlias.error.nonexistent);
+      return this.addReply(message, verifyAlias.error.nonexistent);
     }
 
     if (user.editcount === 0) {
-      return message.channel.send(verifyAlias.error.edits);
+      return this.addReply(message, verifyAlias.error.edits);
     }
 
     verifyUser = await this.getMastheadValue(user.userid);
 
     if (verifyUser.value !== message.author.tag) {
-      return message.channel.send(verifyAlias.error.mismatched);
+      return this.addReply(message, verifyAlias.error.mismatched);
     }
 
     message.member.roles.add(config.roles.user);
-    message.channel.send(verifyAlias.success.applied);
+    this.addReply(message, verifyAlias.success.applied);
   }
 }
 
