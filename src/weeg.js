@@ -40,12 +40,12 @@ class Weeg {
       (!message.content.startsWith(this.config.prefix + "verify"))
     ) {
       message.delete();
-      message.reply(lang.weeg.error.unrelated).then(msg => {
+
+      return message.reply(lang.weeg.error.unrelated).then(msg => {
         msg.delete({
           timeout: this.config.interval
         })
       }).catch(console.error);
-      return;
     }
 
     if (!message.content.startsWith(this.config.prefix) || message.author.bot) {
