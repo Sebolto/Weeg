@@ -2,7 +2,8 @@
   "weeg": {
     "error": {
       "error": "Error",
-      "login": "Error: Already logged in"
+      "login": "Error: Already logged in",
+      "unrelated": "Error: This channel's messages are restricted to verification requests only"
     },
     "success": {
       "online": "Online"
