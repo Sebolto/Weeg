@@ -14,8 +14,6 @@ class Weeg {
     this.config = {};
     this.config.TOKEN = process.env.TOKEN;
     this.config.prefix = "!";
-    this.config.interval = 5000;
-
     this._loggedIn = false;
     this._debug = true;
 
@@ -33,19 +31,6 @@ class Weeg {
   }
 
   onMessage (message) {
-    if (
-      (message.channel.id === config.channels.verify) &&
-      (!message.content.startsWith(this.config.prefix + "verify"))
-    ) {
-      message.delete(1000);
-      message.channel.send(lang.weeg.error.unrelated);
-
-      setTimeout(() => {
-        message.delete(1000);
-      }, this.config.interval);
-      return;
-    }
-
     if (!message.content.startsWith(this.config.prefix) || message.author.bot) {
       return;
     }
