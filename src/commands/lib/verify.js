@@ -57,7 +57,8 @@ class Verify extends Command {
     userInfo = await this.getUserInfo(wikiUsername);
 
     if (userInfo.error) {
-      return console.log(`[${userInfo.error.code}] - ${userInfo.error.info}`);
+      console.log(`[${userInfo.error.code}] - ${userInfo.error.info}`);
+      return this.addReply(message, verifyAlias.error.server);
     }
 
     user = userInfo.query.users[0];
