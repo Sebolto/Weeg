@@ -10,7 +10,7 @@ class Verify extends Command {
       searchParams: {
         action: "query",
         list: "users",
-        usprop: "editcount",
+        usprop: "groups|editcount",
         ususers: username,
         format: "json"
       }
@@ -24,6 +24,14 @@ class Verify extends Command {
         accept: "*/*"
       }
     }).json();
+  }
+
+  shouldBeChatModerator (groups) {
+    return new RegExp([
+      "sysop",
+      "chatmoderator",
+      "threadmoderator"
+    ].join("|")).test(groups.join(" "));
   }
 
   addReply (message, langMessage) {
@@ -77,11 +85,15 @@ class Verify extends Command {
       return this.addReply(message, verifyAlias.error.mismatched);
     }
 
+    if (this.shouldBeChatModerator(user.groups)) {
+      message.member.roles.add(config.roles.moderator);
+    }
+
     message.member.roles.add(config.roles.user);
     message.client.channels.cache.get(config.channels.logs).send(
       `${message.author.tag} -> User:${wikiUsername}`
     );
-    this.addReply(message, verifyAlias.success.applied);
+    this.addReply(message, verifyAlias.success.granted);
   }
 }
 

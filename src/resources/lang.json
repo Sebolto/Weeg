@@ -42,7 +42,7 @@
         "server": "a server-side error was encountered. Please try again."
       },
       "success": {
-        "applied": "the \"User\" role has been applied."
+        "granted": "access to the server has been granted."
       }
     }
   }
