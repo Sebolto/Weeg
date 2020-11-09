@@ -71,7 +71,7 @@ class Verify extends Command {
 
     user = userInfo.query.users[0];
 
-    if (!user) {
+    if (!user || !user.userid) {
       return this.addReply(message, verifyAlias.error.nonexistent);
     }
 
