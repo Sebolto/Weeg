@@ -36,21 +36,19 @@ class Weeg {
   onMessage (message) {
     if (
       !message.author.bot &&
-      (message.channel.id === config.channels.verify)
+      (message.channel.id === config.channels.verify) &&
+      (!message.content.startsWith(this.config.prefix + "verify"))
     ) {
       message.client.channels.cache.get(config.channels.qalogs).send(
         `${message.author.tag}:\n> ${message.content}`
       );
+      message.delete();
 
-      if (!message.content.startsWith(this.config.prefix + "verify")) {
-        message.reply(lang.weeg.error.unrelated).then(msg => {
-          msg.delete({
-            timeout: this.config.interval
-          })
-        }).catch(console.error);
-      }
-
-      return message.delete();
+      return message.reply(lang.weeg.error.unrelated).then(msg => {
+        msg.delete({
+          timeout: this.config.interval
+        })
+      }).catch(console.error);
     }
 
     if (!message.content.startsWith(this.config.prefix) || message.author.bot) {
