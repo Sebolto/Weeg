@@ -41,7 +41,6 @@ class Weeg {
       message.client.channels.cache.get(config.channels.qalogs).send(
         `${message.author.tag}:\n> ${message.content}`
       );
-      message.delete();
 
       if (!message.content.startsWith(this.config.prefix + "verify")) {
         message.reply(lang.weeg.error.unrelated).then(msg => {
@@ -51,7 +50,7 @@ class Weeg {
         }).catch(console.error);
       }
 
-      return;
+      return message.delete();
     }
 
     if (!message.content.startsWith(this.config.prefix) || message.author.bot) {
