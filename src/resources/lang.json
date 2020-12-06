@@ -38,6 +38,7 @@
         "redundant": "your account already has the \"User\" role.",
         "nonexistent": "no such user account found.",
         "edits": "you have an insufficient edit count on the wiki.",
+        "missing": "your Discord username is missing from your wiki masthead.",
         "mismatched": "your current Discord username and wiki masthead Discord name do not match.",
         "server": "a server-side error was encountered. Please try again."
       },
