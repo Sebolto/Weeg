@@ -81,7 +81,10 @@ class Verify extends Command {
 
     verifyUser = await this.getMastheadValue(user.userid);
 
-    if (verifyUser.value !== message.author.tag) {
+    if (
+      !verifyUser.hasOwnProperty("value") ||
+      verifyUser.value !== message.author.tag
+    ) {
       return this.addReply(message, verifyAlias.error.mismatched);
     }
 
